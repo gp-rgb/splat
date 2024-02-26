@@ -743,12 +743,11 @@ async function main() {
         viewMatrix = JSON.parse(decodeURIComponent(location.hash.slice(1)));
         carousel = false;
     } catch (err) {}
-    const url = new URL(
-        // "nike.splat",
-        // location.href,
-        params.get("url") || "train.splat",
-        "https://huggingface.co/cakewalk/splat-data/resolve/main/",
-    );
+    // Replace "train.splat" with the local file path
+    const localFilePath = "./output.splat"; // Modify this line
+    const baseUrl = window.location.href.replace(window.location.pathname, "");
+
+    const url = new URL(localFilePath, baseUrl);
     const req = await fetch(url, {
         mode: "cors", // no-cors, *cors, same-origin
         credentials: "omit", // include, *same-origin, omit
